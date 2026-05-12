@@ -24,20 +24,52 @@ Feature = 단일 기능 구현 단위. cycle: 20 → 21 → 10 ↔ INTEGRATION �
 - AskUserQuestion: 이어서 진행 / 새 Feature 로 (다른 이름) / 취소
 - "이어서" 시: 11-HISTORY 마지막 N줄 + 10-WORK-LOG 최근 ADR + 90-SUMMARY 의 검증 상태 → 요약 후 다음 지시 받기
 
-### 3. 초기 파일 생성 (M2: 핵심 4 파일만)
+### 3. Project 컨텍스트 감지
 
-- `00-BRIEF.md` — 빈 템플릿
+호출 시점의 CWD 또는 상위 경로에 `00-VISION.md` + `01-DECOMPOSITION.md` 가 있으면 **Project 내부 호출**로 판단:
+
+- 폴더 위치: `projects/<project>/features/@<name>/` (Project 안)
+- vs. 단독 feature: `features/YYMMDD-<name>/` (기존)
+
+Project 내부면 추가 동작:
+- sibling `02-SPEC/@<name>/SPEC.md` 존재 검사
+- 있으면 `00-BRIEF.md` frontmatter 에 `spec: ../../02-SPEC/@<name>/SPEC.md` 자동 추가
+- SPEC §3 (Acceptance criteria) 를 `00-BRIEF.md` 의 AC 섹션에 복사 (편집은 SPEC 쪽에서, BRIEF 는 참조용 사본 명시)
+- SPEC 의 `type` 태그를 `00-BRIEF.md` frontmatter 에 `type: <ui|api|data|infra|integration|tooling>` 으로 기록
+
+SPEC 없으면 standalone 동작 (단독 feature 처럼).
+
+### 4. 초기 파일 생성 (M2: 핵심 4 파일만)
+
+- `00-BRIEF.md` — 빈 템플릿 (Project 내부면 SPEC 참조·type 태그 주입)
 - `10-WORK-LOG.md` — 빈 템플릿
 - `11-HISTORY.md` — 빈 템플릿 + 첫 entry "create | <폴더>"
 - `90-SUMMARY.md` — 빈 템플릿
 
 나머지 (01, 02, 20, 21, 30) 는 lazy: phase 진입 시 생성.
 
-### 4. 다음 단계
+### 5. Feature type 태그
+
+Project 내부 호출이면 SPEC 의 type 을 그대로 사용. 단독 호출이면:
+- 사용자에게 묻기 (AskUserQuestion: ui/api/data/infra/integration/tooling)
+- 또는 type 분류 생략 (BRIEF frontmatter `type: untyped`)
+
+향후 type 별 cycle 변형 (예: `data` 는 마이그레이션 검증 단계 추가) 의 기반.
+
+### 6. 다음 단계
 
 00-BRIEF 본문 작성을 위해 사용자에게:
-- "00-BRIEF 채우기 시작? brainstorming skill 도 호출할까?"
-- 큰 feature 면 `superpowers:brainstorming` 으로 진입 유도
+- Project 내부: "SPEC 기반 BRIEF 초안이 채워졌습니다. 검토 후 20-SCENARIO 로 진입?"
+- 단독: "00-BRIEF 채우기 시작? `superpowers:brainstorming` 도 호출할까?"
+
+### 7. Project 11-HISTORY 동기화
+
+Project 내부면 feature 생성·종료 시 상위 Project 의 `11-HISTORY.md` 에도 한 줄 append:
+
+```
+- HH:MM | start feature @<name> | features/@<name>
+- HH:MM | complete feature @<name> | close ✅
+```
 
 ## Cycle (참조)
 

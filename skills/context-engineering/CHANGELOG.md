@@ -1,5 +1,30 @@
 # Context Engineering Skill — 변경 이력
 
+## 2026-05-12 — Project skill 오케스트레이터 재설계 (카테고리 1·2)
+
+- **변경**: Project skill 을 단순 컨테이너 → 기획→분해→스펙→플랜→실행→인수 (P1~P6) 오케스트레이터로 개편
+- **추가 산출물 (project/templates/)**:
+  - `00-VISION.md` — 한 장 기획서 (입력)
+  - `01-DECOMPOSITION.md` — `architect` agent 의 Feature 분해 + DAG
+  - `02-SPEC.md` — `spec-writer` 가 feature 별로 채우는 템플릿 (`02-SPEC/@<name>/SPEC.md`)
+  - `03-PLAN.md` — 실행 순서·마일스톤·리스크
+  - `91-HANDOFF.md` — QA 인수 (50~80줄, dev→QA scope 정책 반영)
+- **추가 agents (~/.claude/agents/)**:
+  - `architect.md` — 기획 분해·DAG·실행 batch (Plan/general 류, code 안 씀)
+  - `spec-writer.md` — Feature 별 AC·계약·엣지케이스 명세 (구현 안 함)
+- **Feature type 도입**: `ui/api/data/infra/integration/tooling` — `architect` 가 분류, SPEC frontmatter 에 기록, feature 호출 시 BRIEF 에 주입
+- **feature/SKILL.md 수정**:
+  - Project 컨텍스트 감지 (CWD 상위에 00-VISION + 01-DECOMPOSITION 존재 시)
+  - sibling 02-SPEC/@<name>/SPEC.md 자동 참조 + AC 복사
+  - type 태그 주입, Project 의 11-HISTORY 에 feature start/complete 한 줄 동기화
+- **호환성**: 기존 `00-OVERVIEW.md` 베이스 Project 폴더는 그대로 인정. 신규부터 새 모델 적용. 강제 마이그레이션 X.
+- **수정 파일**:
+  - `skills/context-engineering/project/SKILL.md` (전면 개편)
+  - `skills/context-engineering/feature/SKILL.md` (Project 인식 + SPEC 주입 + type 태그)
+  - `skills/context-engineering/project/templates/` 5개 신규
+  - `agents/architect.md`, `agents/spec-writer.md` 신규
+- **이유**: 기존 Project 가 "여러 Feature 의 디렉토리 묶음" 수준이라 기획·분해·의존성 관리가 ad-hoc. 한 장 기획에서 출발해 Feature 단위 구현까지 일관된 phase 모델로 추적 가능하게.
+
 ## 2026-05-12 — JIRA 중심 컨벤션 개정
 
 - export/import 정책 변경: JIRA 가 단일 anchor, Confluence 는 선택적 (반드시 JIRA 안에 링크 자동 삽입)
