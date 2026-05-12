@@ -1,0 +1,32 @@
+[
+  {
+    "content": "tailscale status로 IP 조회 기능 구현",
+    "status": "completed",
+    "activeForm": "tailscale IP 조회 기능 구현 중"
+  },
+  {
+    "content": "prometheus.yaml 구조 파악 및 job 추가 로직 구현",
+    "status": "completed",
+    "activeForm": "prometheus.yaml job 추가 로직 구현 중"
+  },
+  {
+    "content": "prometheus 백업 및 재시작 로직 구현",
+    "status": "completed",
+    "activeForm": "prometheus 백업/재시작 구현 중"
+  },
+  {
+    "content": "SSH로 원격 서버 커널/cAdvisor 버전 확인",
+    "status": "completed",
+    "activeForm": "원격 서버 버전 확인 구현 중"
+  },
+  {
+    "content": "cAdvisor 교체 필요시 docker-compose 업데이트",
+    "status": "completed",
+    "activeForm": "cAdvisor 교체 로직 구현 중"
+  },
+  {
+    "content": "전체 통합 테스트",
+    "status": "in_progress",
+    "activeForm": "전체 통합 테스트 중"
+  }
+]

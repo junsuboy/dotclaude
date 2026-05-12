@@ -1,0 +1,22 @@
+[
+  {
+    "content": "총괄 관제 테이블에 Disk Usage 열 추가",
+    "status": "completed",
+    "activeForm": "총괄 관제 테이블에 Disk Usage 열 추가 중"
+  },
+  {
+    "content": "단일 PC 관제에 Disk Used 게이지 패널 추가",
+    "status": "completed",
+    "activeForm": "단일 PC 관제에 Disk Used 게이지 패널 추가 중"
+  },
+  {
+    "content": "단일 Docker 관제에 Disk Usage 패널 추가",
+    "status": "completed",
+    "activeForm": "단일 Docker 관제에 Disk Usage 패널 추가 중"
+  },
+  {
+    "content": "수정된 대시보드 Grafana에 업로드",
+    "status": "in_progress",
+    "activeForm": "수정된 대시보드 Grafana에 업로드 중"
+  }
+]

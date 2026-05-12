@@ -1,0 +1,31 @@
+# Runtime state — 추적 안 함
+cache/
+sessions/
+shell-snapshots/
+file-history/
+tasks/
+telemetry/
+statsig/
+backups/
+debug/
+paste-cache/
+session-env/
+
+# Logs / history
+history.jsonl
+*.log
+
+# Cache files
+*-cache.json
+mcp-needs-auth-cache.json
+stats-cache.json
+
+# Local override / sensitive
+settings.local.json
+
+# Plugin cache (외부 관리)
+plugins/cache/
+
+# OS / editor
+.DS_Store
+*.swp

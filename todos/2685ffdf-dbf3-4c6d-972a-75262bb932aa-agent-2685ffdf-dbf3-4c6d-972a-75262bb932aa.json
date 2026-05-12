@@ -1,0 +1,17 @@
+[
+  {
+    "content": "Fix local export to verify file size after creation",
+    "status": "completed",
+    "activeForm": "Fixing local export to verify file size after creation"
+  },
+  {
+    "content": "Fix remote tar file validation to delete invalid files",
+    "status": "completed",
+    "activeForm": "Fixing remote tar file validation"
+  },
+  {
+    "content": "Fix deploy playbook to validate remote file before loading",
+    "status": "in_progress",
+    "activeForm": "Fixing deploy playbook validation"
+  }
+]

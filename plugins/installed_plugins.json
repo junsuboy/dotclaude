@@ -1,0 +1,55 @@
+{
+  "version": 2,
+  "plugins": {
+    "swift-lsp@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/junsuboy/.claude/plugins/cache/claude-plugins-official/swift-lsp/1.0.0",
+        "version": "1.0.0",
+        "installedAt": "2026-02-05T09:53:41.565Z",
+        "lastUpdated": "2026-02-05T09:53:41.565Z",
+        "gitCommitSha": "27d2b86d72da27c64585150857cee8472ad47abb"
+      }
+    ],
+    "serena@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/junsuboy/.claude/plugins/cache/claude-plugins-official/serena/unknown",
+        "version": "unknown",
+        "installedAt": "2026-03-12T04:36:09.071Z",
+        "lastUpdated": "2026-05-08T04:29:42.669Z",
+        "gitCommitSha": "27d2b86d72da27c64585150857cee8472ad47abb"
+      }
+    ],
+    "clangd-lsp@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/junsuboy/.claude/plugins/cache/claude-plugins-official/clangd-lsp/1.0.0",
+        "version": "1.0.0",
+        "installedAt": "2026-03-19T08:51:40.193Z",
+        "lastUpdated": "2026-03-19T08:51:40.193Z",
+        "gitCommitSha": "27d2b86d72da27c64585150857cee8472ad47abb"
+      }
+    ],
+    "superpowers@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/junsuboy/.claude/plugins/cache/claude-plugins-official/superpowers/5.1.0",
+        "version": "5.1.0",
+        "installedAt": "2026-04-09T01:18:35.159Z",
+        "lastUpdated": "2026-05-08T04:29:44.133Z",
+        "gitCommitSha": "917e5f53b16b115b70a3a355ed5f4993b9f8b73d"
+      }
+    ],
+    "frontend-design@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/junsuboy/.claude/plugins/cache/claude-plugins-official/frontend-design/unknown",
+        "version": "unknown",
+        "installedAt": "2026-04-10T11:37:29.146Z",
+        "lastUpdated": "2026-05-08T04:29:42.668Z",
+        "gitCommitSha": "27d2b86d72da27c64585150857cee8472ad47abb"
+      }
+    ]
+  }
+}
