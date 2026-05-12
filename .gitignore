@@ -26,6 +26,12 @@ settings.local.json
 # Plugin cache (외부 관리)
 plugins/cache/
 
+# Agent runtime state
+todos/
+
+# Per-session memory (runtime, distinct from auto-memory)
+projects/*/*/session-memory/
+
 # OS / editor
 .DS_Store
 *.swp
