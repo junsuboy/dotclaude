@@ -14,10 +14,10 @@
     "serena@claude-plugins-official": [
       {
         "scope": "user",
-        "installPath": "/Users/junsuboy/.claude/plugins/cache/claude-plugins-official/serena/unknown",
-        "version": "unknown",
+        "installPath": "/Users/junsuboy/.claude/plugins/cache/claude-plugins-official/serena/289eac1b941b",
+        "version": "289eac1b941b",
         "installedAt": "2026-03-12T04:36:09.071Z",
-        "lastUpdated": "2026-05-08T04:29:42.669Z",
+        "lastUpdated": "2026-05-12T04:53:08.513Z",
         "gitCommitSha": "27d2b86d72da27c64585150857cee8472ad47abb"
       }
     ],
@@ -44,10 +44,10 @@
     "frontend-design@claude-plugins-official": [
       {
         "scope": "user",
-        "installPath": "/Users/junsuboy/.claude/plugins/cache/claude-plugins-official/frontend-design/unknown",
-        "version": "unknown",
+        "installPath": "/Users/junsuboy/.claude/plugins/cache/claude-plugins-official/frontend-design/289eac1b941b",
+        "version": "289eac1b941b",
         "installedAt": "2026-04-10T11:37:29.146Z",
-        "lastUpdated": "2026-05-08T04:29:42.668Z",
+        "lastUpdated": "2026-05-12T04:53:08.514Z",
         "gitCommitSha": "27d2b86d72da27c64585150857cee8472ad47abb"
       }
     ]
