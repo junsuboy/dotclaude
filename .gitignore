@@ -26,6 +26,9 @@ settings.local.json
 # Plugin cache (외부 관리)
 plugins/cache/
 
+# Skill 자동 백업
+skills/*/.backup/
+
 # Agent runtime state
 todos/
 

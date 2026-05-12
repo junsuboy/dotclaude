@@ -28,14 +28,13 @@
 ### 2.1 산출물 폴더 — 공통 컨벤션
 
 - prefix: `YYMMDD-` (시작 날짜)
-- 외부 링크 마커: `[CONF]`, `[JIRA]` (export 후 자동 추가, 알파벳 순)
+- 외부 링크 마커: `[<JIRA-KEY>]` (JIRA export/import 후 자동 추가). Confluence 는 JIRA 안에 링크되므로 별도 마커 없음.
 - 예시:
   ```
-  260508-data-retention                       (외부 링크 없음)
-  260508-[CONF]-data-retention                (Confluence 연동)
-  260508-[JIRA]-data-retention                (Jira 연동)
-  260508-[CONF][JIRA]-data-retention          (둘 다, 알파벳 순)
+  260508-data-retention                          (외부 링크 없음)
+  260508-[PROJ-1183]-data-retention              (Jira 연동, Confluence 있을 수도 없을 수도)
   ```
+- 2026-05-12 이전 `[JIRA]` / `[CONF]` 시스템명 마커는 deprecated — `ce-export` 가 자동 마이그레이션.
 
 ### 2.2 Skill 정의 (user-level, 배포본)
 
@@ -459,38 +458,68 @@ URL 만 다름:
 [9] 11-HISTORY 한 줄 append
 ```
 
-### 7.4 `LINKS.md` 양식
+### 7.4 `LINKS.md` 양식 (2026-05-12 개정)
+
+JIRA 가 anchor — Confluence 는 종속.
 
 ```markdown
 # Linked External Documents
 
-## Jira
-- key: PROJ-123
-- url: https://yourcompany.atlassian.net/browse/PROJ-123
-- last_sync: 2026-05-12 14:00
-- mode: append
+## Jira  (필수)
 
-## Confluence
+- key: PROJ-1183
+- url: https://yourcompany.atlassian.net/browse/PROJ-1183
+- project: FSIF
+- title: <Jira 제목>
+- assignee: <이름>
+- status_at_last_sync: BACKLOG
+
+### Sync history
+
+- 2026-05-12 14:00 — direction: export, mode: overwrite, source: 90-SUMMARY.md
+
+## Confluence  (선택, 0..N개)
+
 - page_id: 12345
 - url: https://yourcompany.atlassian.net/wiki/spaces/DOCS/pages/12345/Data+Retention
 - title: Data Retention Spec
-- last_sync: 2026-05-12 14:00
-- mode: overwrite
+- linked_in_jira: yes
+
+### Sync history
+
+- 2026-05-12 14:00 — direction: export, mode: overwrite, source: 90-SUMMARY.md
 ```
 
-머신·사람 모두 읽기 좋음.
+### 7.5 폴더명 마커 규칙 (2026-05-12 개정)
 
-### 7.5 폴더명 마커 규칙
+- 형태: `[<JIRA-KEY>]` (예: `[PROJ-1183]`)
+- 첫 JIRA export/import 시 자동 rename
+- Confluence 단독으로는 마커 추가 X — JIRA 가 anchor 이므로 Confluence 는 LINKS.md 와 JIRA 티켓 안에 링크로 존재
+- 동일 폴더에 JIRA 키 여러 개 묶이는 비표준 케이스: 첫 키만 폴더 마커로, 나머지는 LINKS.md 본문에
+- 마이그레이션: 기존 `[JIRA]` / `[CONF]` 마커는 `ce-export` 호출 시 LINKS.md key 를 읽어 자동 변환
 
-- 알파벳 순: `[CONF]` 이 `[JIRA]` 보다 먼저
-- 첫 export 시점에 자동 rename
-- 두 번째 시스템도 export 되면 마커 추가, 알파벳 순 재정렬
-- 기존 마커는 다시 export 되어도 변동 없음
-- 마커는 LINKS.md 와 일관성 유지 — LINKS.md 에 항목이 사라지면 마커도 제거
+### 7.6 Confluence 링크의 JIRA 자동 삽입
 
-### 7.6 인증
+Confluence 페이지를 export 한 직후, JIRA description 끝에 `## Linked Confluence` 섹션이 자동 추가/갱신된다. 양식:
+
+```
+## Linked Confluence
+- <페이지 제목>: <URL>
+```
+
+같은 URL 이미 있으면 skip. 권한/네트워크 실패 시 export 자체는 성공으로 두고 11-HISTORY 에 `confluence-link-injection-failed` 기록.
+
+### 7.7 인증
 
 MCP (`mcp__atlassian__*`) 가 처리. 인증 안 됐으면 `mcp__atlassian__authenticate` 호출 유도.
+
+### 7.8 JIRA anchor 강제 정책 (2026-05-12)
+
+- 모든 export/import 는 JIRA 키를 요구. 인자가 Confluence URL 만 있는 경우:
+  1. target 폴더 LINKS.md 에 JIRA key 가 있으면 그걸 사용
+  2. 없으면 AskUserQuestion 으로 JIRA 키 요청
+  3. 사용자가 거부 → export/import 중단
+- 이유: Confluence 페이지가 떠도는 상태로 작업 폴더와 연결되면 추적이 어려움. JIRA 티켓을 단일 진입점으로 강제.
 
 ---
 

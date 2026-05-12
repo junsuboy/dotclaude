@@ -38,7 +38,7 @@ AskUserQuestion("어떤 작업 유형인가요?",
 - 사용자 확인 무조건 받기 (호출 직전·phase 전환·큰 갈림길)
 - 11-HISTORY append 는 자동 (의미 있는 모든 액션 기록)
 - 10/11 분류 애매하면 묻기
-- 폴더명: `YYMMDD-<name>` + 외부 링크 마커 `[CONF]`, `[JIRA]` — 둘 다 적용 시 `[CONF][JIRA]` 연결 (알파벳 순)
+- 폴더명: `YYMMDD-<name>` + JIRA 연결 시 `[<JIRA-KEY>]` 마커 추가 (예: `260508-[PROJ-1183]-data-retention`). Confluence 는 JIRA 안에 링크되므로 별도 마커 없음.
 
 ## 참조
 
