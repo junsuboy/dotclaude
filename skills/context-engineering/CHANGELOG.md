@@ -1,5 +1,27 @@
 # Context Engineering Skill — 변경 이력
 
+## 2026-05-12 — 외부 skill 매트릭스 + type 별 cycle hook (카테고리 1)
+
+Project skill 재설계 직후 보강. 새 agent 추가 없이 기존 자산 재활용 + feature cycle 경량 boost.
+
+- **Project SKILL** 에 "phase × 외부 skill" 호출 매트릭스 추가:
+  - P1 Vision 비어있을 때 → `superpowers:brainstorming` 제안
+  - P5 feature close 직전 → `superpowers:requesting-code-review` 자동 트리거
+  - P5 batch 병렬 → `superpowers:dispatching-parallel-agents` 제안
+  - P6 HANDOFF 직전 → `superpowers:verification-before-completion` enforce
+- **Feature SKILL** 에 type 별 cycle hook 추가 (경량 — 새 phase 없음, 기존 phase 의 섹션·산출물 boost):
+  - `data` → `21-MIGRATION.md` (DDL diff·dry-run·rollback) 자동 제안
+  - `ui` → `frontend-design` skill 호출 제안, 디자인 ADR
+  - `api` → schema·contract test enforce
+  - `infra` → `21-ROLLBACK.md` 자동 제안
+  - `integration` → stub/real 분리 enforce
+  - `tooling` → self-use 섹션 자동 제안
+- **새 agent 추가 X** — 중복·드리프트 회피
+- 수정 파일:
+  - `skills/context-engineering/project/SKILL.md`
+  - `skills/context-engineering/feature/SKILL.md`
+- 이유: Project 가 단순 컨테이너 아니라는 점은 P1~P6 으로 정리됐지만, 실 구현 시 type 별 차이 (예: data 마이그레이션, ui 디자인) 가 cycle 에 반영 안 되어 있었음. 경량 hook 으로 보강.
+
 ## 2026-05-12 — Project skill 오케스트레이터 재설계 (카테고리 1·2)
 
 - **변경**: Project skill 을 단순 컨테이너 → 기획→분해→스펙→플랜→실행→인수 (P1~P6) 오케스트레이터로 개편

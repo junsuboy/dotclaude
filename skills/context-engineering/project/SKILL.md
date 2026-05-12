@@ -18,6 +18,25 @@ Project = 기획서 한 장에서 시작해 Feature 를 분해·명세·계획·
 | **P5 Execute** | `features/@<name>/` | 각 Feature 구현 | `/ce-feature` (SPEC 자동 주입) |
 | **P6 Handoff** | `91-HANDOFF.md` | QA 인수 (50~80줄) | 사용자 + 자동 초안 |
 
+## 외부 skill 호출 매트릭스
+
+기존 superpowers / frontend-design 자산을 재활용. Project skill 이 직접 invoke.
+
+| 시점 | 호출 skill | 동작 | 자동 vs 제안 |
+|------|-----------|------|-------------|
+| P1 진입, VISION 이 비어있을 때 | `superpowers:brainstorming` | Vision 항목 (problem/user/metric/scope) 채우기 대화 | **제안** (사용자가 직접 쓸 수도) |
+| P1 → P2 직전 VISION 검증 | `superpowers:brainstorming` | 가정·non-goal·open question rubber duck | 제안 |
+| P2 직전 architect 호출 전 | `superpowers:writing-plans` (옵션) | 큰 Project 면 plan-first | 제안 |
+| P3 SPEC 모두 confirmed → P4 직전 | (없음 — architect 가 처리) | — | — |
+| P5 각 feature `90-SUMMARY` close 직전 | `superpowers:requesting-code-review` | feature 단위 리뷰 받고 결과 반영 후 close | **자동 트리거 + 사용자 확정** |
+| P5 batch 병렬 실행 시 | `superpowers:dispatching-parallel-agents` | 독립 feature 동시 작업 | 제안 |
+| P6 HANDOFF 작성 직전 | `superpowers:verification-before-completion` | "완료" 라고 적기 전 검증 | **자동 enforce** |
+
+호출 정책:
+- "자동 트리거" = Project skill 이 해당 시점에 도달하면 사용자에게 묻지 않고 invoke (사용자는 결과만 검토)
+- "제안" = AskUserQuestion 으로 "이 skill 호출할까요?" 묻기
+- 사용자가 명시적으로 "skill 없이" 라고 하면 skip
+
 ## 폴더 구조
 
 ```

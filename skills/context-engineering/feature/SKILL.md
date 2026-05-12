@@ -81,6 +81,25 @@ Project 내부면 feature 생성·종료 시 상위 Project 의 `11-HISTORY.md` 
 - 시나리오 변경 → 20 으로
 - 코드/설계 변경 → INTEGRATION → 21 재검증
 
+## Type 별 Cycle hook (경량)
+
+`type` frontmatter 값에 따라 cycle 의 특정 시점에서 추가 동작·산출물 제안. 강제 X — 사용자가 skip 가능.
+
+| Type | Hook 시점 | 추가 산출물 / 동작 | 강도 |
+|------|-----------|-------------------|------|
+| `data` | 20-SCENARIO 작성 직후 | `21-MIGRATION.md` 생성 제안 — DDL diff, dry-run plan, rollback 시나리오, lock 영향 추정 | 자동 제안 |
+| `ui` | 00-BRIEF 확정 직후 | `frontend-design` skill 호출 제안 (디자인 안 도출), 결정 시 `10-WORK-LOG` 에 디자인 ADR 추가 | 자동 제안 |
+| `api` | SPEC §4b 또는 20-SCENARIO 작성 시 | request/response schema 명시 강제 + 21 에 contract test 케이스 (정상·400·401·5xx) 포함 | enforce |
+| `infra` | 20-SCENARIO 작성 직후 | `21-ROLLBACK.md` 생성 제안 — 롤백 명령·검증·blast radius | 자동 제안 |
+| `integration` | 20-SCENARIO 작성 시 | stub 모드 / real 모드 분리 명시, sandbox 검증 항목 21 에 포함 | enforce |
+| `tooling` | 21-TEST_RESULTS 작성 시 | self-use 섹션 추가 — 만든 도구를 직접 1회 이상 사용한 결과 기록 | 자동 제안 |
+| `untyped` | — | hook 없음 | — |
+
+호출 정책:
+- "자동 제안" — feature skill 이 해당 시점에서 AskUserQuestion 으로 묻기
+- "enforce" — 사용자 동의 없이도 산출물 섹션을 템플릿에 자동 추가 (작성은 사용자)
+- 모든 hook 은 추가 phase 가 아니라 기존 phase 의 섹션·파일 boost. cycle 자체는 동일.
+
 ## Auto vs Ask 정책
 
 | 시점 | 묻기 |
