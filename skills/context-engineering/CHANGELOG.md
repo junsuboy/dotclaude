@@ -1,5 +1,13 @@
 # Context Engineering Skill — 변경 이력
 
+## 2026-05-20 — ce-export 독자 친화 변환(de-jargon) 제약 추가 (카테고리 2)
+
+- 변경: export SKILL.md 에 핵심 정책 #5(외부 문서 self-contained) + "독자 친화 변환" 섹션 신설, Export 흐름 [5] 단계에 de-jargon 패스 삽입
+- 내용: 내부 넘버링(`00-`, `91-` …)·파일명·CE 용어(type/phase/agent)를 외부 문서에서 일반 표현으로 치환하는 표·원칙 정의. 작업 폴더 원본은 그대로 유지(export 본문에만 적용)
+- 영향: 기존 폴더·넘버링 체계 변경 없음 — 향후 export 렌더링에만 적용
+- 마이그레이션: N/A
+- 이유: 외부(Jira/Confluence) 독자가 CE workflow 를 몰라도 문서를 이해할 수 있게
+
 ## 2026-05-12 — 외부 skill 매트릭스 + type 별 cycle hook (카테고리 1)
 
 Project skill 재설계 직후 보강. 새 agent 추가 없이 기존 자산 재활용 + feature cycle 경량 boost.

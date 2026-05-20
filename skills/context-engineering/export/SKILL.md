@@ -13,6 +13,7 @@ description: 작업 폴더의 산출물을 Jira/Confluence 로 업로드(/ce-exp
 2. **Confluence 는 선택적.** 사용해도 되지만 반드시 JIRA 티켓과 함께. Confluence 페이지 생성/업데이트 시 그 링크가 JIRA description 끝부분(또는 코멘트)에 자동 삽입된다.
 3. **폴더 마커 = JIRA 키 자체.** `[PROJ-1183]` 처럼 티켓 번호를 그대로 마커로 사용. 더 이상 `[CONF]`, `[JIRA]` 같은 시스템명 마커를 쓰지 않는다.
 4. **LINKS.md 는 유지.** 양식만 JIRA 우선·Confluence 종속으로 재구성.
+5. **외부 문서는 자립적(self-contained)이어야 한다.** 읽는 사람이 CE workflow 를 몰라도 이해되게 쓴다. 내부 넘버링(`00-`, `91-` …)·파일명·워크플로우 용어(type, phase, agent 이름)를 그대로 노출하지 않고 일반적인 글로 풀어쓴다. → 아래 [독자 친화 변환] 참조.
 
 ## 진입
 
@@ -86,7 +87,9 @@ JIRA 키 없이 Confluence URL 만 들어오면:
     - 추가 (append)
     - 덮어쓰기 (overwrite)
     (코멘트 모드 없음)
-[5] 포맷 변환 + 미리보기 (앞 30줄)
+[5] 독자 친화 변환(de-jargon) + 포맷 변환 + 미리보기 (앞 30줄)
+    - 내부 넘버링·파일명·CE 용어를 일반 표현으로 치환 (아래 [독자 친화 변환] 표)
+    - 미리보기 시점에 변환 결과를 보여줘 사용자가 검수 가능하게 함
 [6] AskUserQuestion: 최종 확인
 [7] mcp__atlassian__* 호출
     - JIRA 모드: editJiraIssue 또는 addCommentToJiraIssue
@@ -145,6 +148,36 @@ JIRA 키 없이 Confluence URL 만 들어오면:
 - Confluence 단독 연결로는 마커 추가 X (JIRA 가 anchor 이므로)
 - 동일 작업에 JIRA 키가 여러 개 묶이는 케이스는 비표준. 발생 시 첫 키만 폴더 마커로 쓰고 나머지는 LINKS.md 본문에 기록.
 - 기존 `[JIRA]` / `[CONF]` 시스템명 마커는 deprecated — `ce-export` 호출 시 LINKS.md 의 key 를 읽어 자동 마이그레이션.
+
+## 독자 친화 변환 (De-jargon) — export 필수
+
+외부로 내보내는 문서는 **CE workflow 를 모르는 사람도 단독으로 이해**할 수 있어야 한다.
+업로드 직전 [5] 단계에서 다음을 적용한다.
+
+### 치환 표
+
+| 내부 마커 / 용어 | 외부 문서 표현 |
+|---|---|
+| `00-VISION`, `00-BRIEF` | 개요·배경·목표 |
+| `01-DECOMPOSITION` | 기능 분해·범위 |
+| `02-SPEC`, `SPEC.md` | 상세 명세 |
+| `03-PLAN` | 구현 계획 |
+| `90-SUMMARY` | 작업 요약 |
+| `30-QA_HANDOFF`, `91-HANDOFF` | QA 인수 / 검증 항목 |
+| `10-WORK-LOG` | 작업 메모 |
+| `11-HISTORY`, `21-TEST_RESULTS` | 변경 이력 / 테스트 결과 |
+| feature·project·research·qna **type** | (언급 안 함 — 문서 성격을 자연어로) |
+| phase P1~P6, architect·spec-writer **agent** | (언급 안 함) |
+
+### 원칙
+
+1. **헤딩의 `NN-` 접두 번호 제거.** `## 02-SPEC` → `## 상세 명세`.
+2. **자기참조 금지.** "이 SPEC 에 따르면", "P3 계획 단계에서", "feature 폴더의…" 같은 내부 맥락 표현을 쓰지 않는다.
+3. **약어·내부 코드네임 풀어쓰기.** 처음 등장 시 한 번은 풀어서 설명.
+4. **외부 시스템 키는 그대로.** JIRA 키(`PROJ-123`)·Confluence 링크는 변환 대상이 아님.
+5. **모호하면 변환 후 미리보기로 검수.** 사용자가 미리보기에서 잔여 전문용어를 잡을 수 있게 한다.
+
+> 적용 범위: export 로 나가는 본문에만 적용. 작업 폴더 원본 파일(`90-SUMMARY.md` 등)은 넘버링·용어 그대로 유지한다.
 
 ## 인증
 
