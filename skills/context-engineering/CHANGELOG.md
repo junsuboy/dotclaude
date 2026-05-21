@@ -1,5 +1,13 @@
 # Context Engineering Skill — 변경 이력
 
+## 2026-05-21 — 산출물 위치 ~/docs/<type>/ 중앙 집중 고정 (카테고리 5)
+
+- 변경: 산출물 폴더 위치를 `프로젝트 코드와 같이(.claude-contexts) | 중앙 집중(~/docs)` 선택 → `~/docs/<type>/<폴더>/` 단일 고정. 위치를 더 이상 묻지 않음
+- 수정 파일: `CLAUDE.md`(산출물 위치 섹션), `CONTEXT_ENGINEERING_DESIGN.md`(L542, L550)
+- 영향: 기존 폴더 마이그레이션 불필요 — 모든 기존 feature 가 이미 `~/docs/features/` 에 존재. alongside-code 경로는 실사용된 적 없음
+- 마이그레이션: N/A
+- 이유: 사용자 실제 컨벤션이 `~/docs/<type>/` 로 정착, 매 호출 위치 질문이 불필요한 마찰
+
 ## 2026-05-20 — ce-export 독자 친화 변환(de-jargon) 제약 추가 (카테고리 2)
 
 - 변경: export SKILL.md 에 핵심 정책 #5(외부 문서 self-contained) + "독자 친화 변환" 섹션 신설, Export 흐름 [5] 단계에 de-jargon 패스 삽입

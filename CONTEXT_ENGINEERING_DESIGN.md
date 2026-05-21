@@ -539,7 +539,7 @@ MCP (`mcp__atlassian__*`) 가 처리. 인증 안 됐으면 `mcp__atlassian__auth
 | Research | "조사/비교/검토" (코드 변경 X) | `/ce-research <topic>` |
 | QnA | 단순 질문 / "물어볼 게" | `/ce-qna <topic>` |
 
-산출물 위치: `<project>/.claude-contexts/<type>/<폴더>/`
+산출물 위치 (고정): `~/docs/<type>/<폴더>/`
 
 **호출 정책:**
 - Claude 가 type + 이름 후보 도출 후 **무조건 AskUserQuestion 으로 확정 받기**
@@ -547,7 +547,7 @@ MCP (`mcp__atlassian__*`) 가 처리. 인증 안 됐으면 `mcp__atlassian__auth
 - 진행 중 phase 전환·분류 모호 케이스도 무조건 확인
 - 11-HISTORY / 21-TEST_RESULTS / 명백한 10-WORK-LOG ADR 은 자동
 
-**산출물 위치:** 작업 폴더는 프로젝트 루트의 `.claude-contexts/` 아래에 분류된다.
+**산출물 위치 (고정):** 작업 폴더는 항상 사용자 홈의 `~/docs/<type>/` 아래에 중앙 집중 분류된다. 위치는 묻지 않는다.
 
 **관련 메타 skill:**
 - `/ce-modify` — Skill 자체 템플릿·구조 수정
