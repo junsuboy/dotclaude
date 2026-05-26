@@ -1,5 +1,28 @@
 # Context Engineering Skill — 변경 이력
 
+## 2026-05-26 — IntegrationTest type 신설 (5번째 task type) (카테고리 1·2·4)
+
+- **변경**: 새 sub-skill `context-engineering:integration-test` + 슬래시 `/ce-integration-test` 추가. 4 task type → **5 task type** (Feature/Project/Research/QnA/**IntegrationTest**)
+- **배경**: PROJ-1175 (On-premise v1.1) 통합테스트가 `~/docs/features/` 에 잘못 들어가 있었음 — Feature 가 아니라 N개 Feature 의 **검증 결과물** 인데 분류 자리가 없었음. 워크플로우도 Feature cycle 과 달라서 (사전 정적 점검 → INT 스텝 → 후조치 5단계 → 커버리지 매트릭스) 별도 type 필요
+- **추가 파일**:
+  - `skills/context-engineering/integration-test/SKILL.md` — 동작 흐름·후조치 프로토콜·다른 type 과 차이
+  - `skills/context-engineering/integration-test/templates/00-SCENARIO.md` — 대상 Feature 표·토폴로지·후조치 프로토콜·INT 스텝
+  - `skills/context-engineering/integration-test/templates/01-EVIDENCE-LOG.md` — 실행정보·사전점검·결과표·커버리지·부수발견·후조치·마감
+  - `skills/context-engineering/integration-test/templates/11-HISTORY.md`
+  - `skills/context-engineering/integration-test/templates/90-SUMMARY.md`
+  - `commands/ce-integration-test.md` — 슬래시 진입점
+- **수정 파일**:
+  - `skills/context-engineering/SKILL.md` — 분류 표 5 type 으로 확장, 모호 케이스 분기 보강
+  - `CLAUDE.md` — type 표 + 산출물 위치 표에 IntegrationTest 한 줄 추가
+- **산출물 위치**: `~/docs/integration-tests/YYMMDD-[<EPIC-KEY>]-<name>/` (에픽 키 = JIRA anchor)
+- **핵심 산출물 3종**: `00-SCENARIO.md` + `01-EVIDENCE-LOG.md` + `evidence/`
+- **워크플로우 특징**:
+  - 후조치 5단계 (실패확정 → 현장핫픽스 → 형상반영 → 재검증 → 문서동기화) — ②현장 + ③형상 모두 기록돼야 PASS(🔁)
+  - Feature 커버리지 매트릭스 (매핑 INT 전부 PASS 일 때만 해당 Feature ✅)
+  - 부수 발견 (대상 외) 별도 트래킹
+- **마이그레이션**: 기존 `~/docs/features/260520-[PROJ-1175]-onpremise-v1.1-integration-test/` → `~/docs/integration-tests/260520-[PROJ-1175]-onpremise-v1.1/` 이동 (단일 폴더, 일반 mv). 파일 내용 변경 없음, 향후 모범 사례 폴더로 SKILL.md 가 참조
+- **이유**: 통합테스트 워크플로우의 일관성·격리·재발 방지. 모든 통합테스트가 `~/docs/integration-tests/` 에 모이고, 후조치 프로토콜이 강제됨
+
 ## 2026-05-21 — 산출물 위치 ~/docs/<type>/ 중앙 집중 고정 (카테고리 5)
 
 - 변경: 산출물 폴더 위치를 `프로젝트 코드와 같이(.claude-contexts) | 중앙 집중(~/docs)` 선택 → `~/docs/<type>/<폴더>/` 단일 고정. 위치를 더 이상 묻지 않음

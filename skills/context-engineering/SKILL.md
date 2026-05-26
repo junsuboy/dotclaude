@@ -1,11 +1,11 @@
 ---
 name: context-engineering
-description: 새 작업을 4 task type (Feature/Project/Research/QnA) 중 하나로 분류하고 산출물 폴더 + 핵심 파일을 생성한다. 사용자가 "구현/만들어/추가/조사/비교/프로젝트 시작/물어볼 게" 같은 요청을 하면 호출.
+description: 새 작업을 5 task type (Feature/Project/Research/QnA/IntegrationTest) 중 하나로 분류하고 산출물 폴더 + 핵심 파일을 생성한다. 사용자가 "구현/만들어/추가/조사/비교/프로젝트 시작/통합테스트/실기기 검증/물어볼 게" 같은 요청을 하면 호출.
 ---
 
 # Context Engineering — 진입점
 
-새 작업을 시작할 때 4 type 중 어디에 속하는지 분류 후 해당 type skill 로 dispatch.
+새 작업을 시작할 때 5 type 중 어디에 속하는지 분류 후 해당 type skill 로 dispatch.
 
 ## Type 분류 가이드
 
@@ -15,6 +15,7 @@ description: 새 작업을 4 task type (Feature/Project/Research/QnA) 중 하나
 | Project | 프로젝트 / 여러 기능 / 통합 개발 | `/ce-project <name>` | `context-engineering:project` |
 | Research | 조사 / 비교 / 검토 (코드 변경 X) | `/ce-research <topic>` | `context-engineering:research` |
 | QnA | 단순 질문 / 물어볼 게 | `/ce-qna <topic>` | `context-engineering:qna` |
+| IntegrationTest | 통합테스트 / 실기기 검증 / 에픽 검증 / 여러 Feature 한꺼번에 검증 | `/ce-integration-test <name>` | `context-engineering:integration-test` |
 
 ## 동작
 
@@ -28,10 +29,13 @@ description: 새 작업을 4 task type (Feature/Project/Research/QnA) 중 하나
 ```
 AskUserQuestion("어떤 작업 유형인가요?",
   A) Feature — 기능 구현
-  B) Project — 여러 기능 묶음
+  B) Project — 여러 기능 묶음 (기획→분해→실행)
   C) Research — 조사 (코드 변경 X)
-  D) QnA — 단순 질문)
+  D) QnA — 단순 질문
+  E) IntegrationTest — 여러 Feature 의 실기기/실환경 통합 검증)
 ```
+
+> IntegrationTest 는 Feature 가 아님. **이미 구현된** N개 Feature 를 실환경에서 한 번에 검증하는 작업. 폴더 위치도 `~/docs/integration-tests/` 로 분리.
 
 ## 핵심 원칙
 
