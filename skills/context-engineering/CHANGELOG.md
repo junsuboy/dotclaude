@@ -1,5 +1,16 @@
 # Context Engineering Skill — 변경 이력
 
+## 2026-06-30 — ce-export 로컬 경로 노출 금지 · 첨부 우선 규칙 신설 (카테고리 2)
+
+- **변경**: `export/SKILL.md` 원칙에 **규칙 #6** 추가 — 외부 문서(JIRA/Confluence)에 작업 폴더의 다른 산출물을 가리킬 때 **로컬 절대경로(`/Users/...`)를 절대 넣지 않는다.**
+- **배경**: `mcp__atlassian__*` 도구에 첨부 업로드 API 가 없음(2026-06 확인) — Jira/Confluence 모두 첨부 도구 미노출. 그동안 export 시 참고 문서를 로컬 경로로 남겨왔는데, 이는 받는 사람이 열 수 없는 죽은 링크가 됨
+- **규칙 내용**:
+  - (a) 첨부가 가능하면 **첨부**한다.
+  - (b) 첨부 업로드가 불가능하면 본문엔 **파일명만** 남기고(예: `90-SUMMARY.md`), 사용자에게 **"이 파일들을 직접 첨부해 주세요"** 라고 명시적으로 가이드한다.
+  - 본문 자체 내용(요약 텍스트 등)은 그대로 풀어쓰되, "참고 문서"류 포인터에만 이 규칙을 적용한다.
+- **수정 파일**: `skills/context-engineering/export/SKILL.md`
+- **이유**: 외부로 내보낸 문서의 자립성(self-contained) 보장 — 로컬 경로 죽은 링크 방지, 첨부 누락 시 사용자 액션 명시
+
 ## 2026-05-26 — IntegrationTest type 신설 (5번째 task type) (카테고리 1·2·4)
 
 - **변경**: 새 sub-skill `context-engineering:integration-test` + 슬래시 `/ce-integration-test` 추가. 4 task type → **5 task type** (Feature/Project/Research/QnA/**IntegrationTest**)
