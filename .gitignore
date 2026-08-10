@@ -41,3 +41,8 @@ projects/*/*/session-memory/
 
 # Session transcripts (회사 작업 대화록 — 절대 추적 금지)
 projects/
+
+# 회사 컨텍스트 포함 파일 — 비공개 (공개용은 CLAUDE.example.md)
+CLAUDE.md
+commands/weekly-report.md
+skills/weekly-report/
