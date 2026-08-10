@@ -38,3 +38,6 @@ projects/*/*/session-memory/
 # OS / editor
 .DS_Store
 *.swp
+
+# Session transcripts (회사 작업 대화록 — 절대 추적 금지)
+projects/
