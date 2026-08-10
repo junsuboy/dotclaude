@@ -46,3 +46,8 @@ projects/
 CLAUDE.md
 commands/weekly-report.md
 skills/weekly-report/
+
+# Runtime state (추가)
+.last-update-result.json
+.last-cleanup
+plugins/.last_inuse_sweep
